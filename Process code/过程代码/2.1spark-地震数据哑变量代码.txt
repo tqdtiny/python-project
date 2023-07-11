@@ -1,10 +1,3 @@
-//以下是废代码
-//import org.apache.spark.rdd.RDD
-//val lines: RDD[String] =sc.textFile(path = "hdfs://master:8020/user/root/earthquake/usa_data.csv")
-//import spark.implicits._
-//val linesDF = lines.toDF()
-//val dataframe = spark.read.format("csv").option("sep", "\\t").option("header", "true").option("inferSchema", "true").load("hdfs://master:8020/user/root/earthquake/usa_data.csv")
-
 //将数据集上传到虚拟机
 
 //以下才是哑变量开始
