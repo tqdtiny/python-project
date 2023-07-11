@@ -45,7 +45,7 @@ def upcity():
     sql = [sql0, sql1, sql2, sql3, sql4, sql5, sql6, sql7, sql8, sql9, sql10, sql11, sql12, sql13, sql14, sql15, sql16,
            sql17, sql18, sql19, sql20, sql21, sql22, sql23, sql24, sql25, sql26, sql27, sql28, sql29, sql30, sql31, sql32, sql33,sql34]
     # city = ["北京","天津","河北","山西","内蒙古","辽宁","吉林","黑龙江","上海","江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","广西","海南","重庆","四川","贵州","云南","西藏","陕西","甘肃","青海","宁夏","新疆","香港","澳门","台湾"]
-    conn = pymysql.connect(host='119.91.135.214', port=3306, user='earthquake', password='123456',
+    conn = pymysql.connect(host='你的服务器IP地址', port=3306, user='earthquake', password='123456',
                            database='earthquake', charset='utf8')
     # 创建游标
     cursor = conn.cursor()
