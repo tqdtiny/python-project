@@ -1,0 +1,69 @@
+//以下是废代码
+//import org.apache.spark.rdd.RDD
+//val lines: RDD[String] =sc.textFile(path = "hdfs://master:8020/user/root/earthquake/usa_data.csv")
+//import spark.implicits._
+//val linesDF = lines.toDF()
+//val dataframe = spark.read.format("csv").option("sep", "\\t").option("header", "true").option("inferSchema", "true").load("hdfs://master:8020/user/root/earthquake/usa_data.csv")
+
+//将数据集上传到虚拟机
+
+//以下才是哑变量开始
+//关闭hadoop安全模式
+hadoop dfsadmin -safemode leave
+//hadoop网页端显示
+http://master:50070
+//启动hadoop
+cd /usr/local/hadoop-2.7.4/sbin
+执行启动：
+./start-dfs.sh
+./start-yarn.sh
+./mr-jobhistory-daemon.sh start historyserver
+
+//将虚拟机中的数据集上传到dhfs中
+//创建dhfs目录
+hadoop fs -mkdir -p /earthquake/input
+//上传数据csv文件
+hadoop fs -put /opt/usa_data.csv /earthquake/input
+hadoop fs -put /opt/china_data.csv /earthquake/input
+//启动spark
+cd /usr/local/spark-2.4.0-bin-hadoop2.6/sbin
+执行
+./start-all.sh
+./start-history-server.sh
+
+
+
+
+//spark哑变量处理
+val cus = spark.read.format("csv").option("header","true").load("hdfs://master:8020/earthquake/input/usa_data.csv")
+//cus.printSchema
+//cus.registerTempTable("users")
+//spark.sql("select * from users").show(3)
+//导入spark库
+import org.apache.spark.ml.feature.StringIndexer
+import org.apache.spark.sql._
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.SparkSession
+//哑变量发震时刻
+val indexer = new StringIndexer().setInputCol("time").setOutputCol("timeIndex").fit(cus)
+val indexed = indexer.transform(cus)
+
+//哑变量位置
+val indexer1 = new StringIndexer().setInputCol("place").setOutputCol("placeIndex").fit(indexed)
+val indexed1 = indexer1.transform(indexed)
+
+//哑变量经度
+val indexer2 = new StringIndexer().setInputCol("lot").setOutputCol("lotIndex").fit(indexed1)
+val indexed2 = indexer2.transform(indexed1)
+
+//哑变量维度
+val indexer3 = new StringIndexer().setInputCol("lat").setOutputCol("latIndex").fit(indexed2)
+val indexed3 = indexer3.transform(indexed2)
+val usadata = indexed3.drop("time").drop("place").drop("lot").drop("lat")
+
+indexed.show()
+
+//保存到hdfs
+usadata.write.csv("hdfs://master:8020/earthquake/output/usa_data1.csv")
+//保存到本地
+usadata.write.format("csv").option("header","true").save("/opt/usa_data1.csv")
