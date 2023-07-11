@@ -79,7 +79,7 @@ def get_china_data(pcount,url):
 # 创建数据库连接
 def get_conn():
     # 建立连接
-    conn = pymysql.connect(host='119.91.135.214',port=3306,user='earthquake',password='123456',database='earthquake',charset='utf8')
+    conn = pymysql.connect(host='你的服务器IP地址',port=3306,user='earthquake',password='123456',database='earthquake',charset='utf8')
     # 创建游标
     cursor = conn.cursor()
     return conn, cursor
@@ -102,7 +102,7 @@ def query(sql,*args):
 #(select place, count(*) as frequency from china_data group by place order by frequency desc limit 1)
 
 def get_all():
-    conn = pymysql.connect(host='119.91.135.214', port=3306, user='earthquake', password='123456',
+    conn = pymysql.connect(host='你的服务器IP地址', port=3306, user='earthquake', password='123456',
                            database='earthquake', charset='utf8')
     sql = "select time,place,level from china_data limit 10"
     # 创建游标
@@ -129,7 +129,7 @@ def get_l1_data():
     return res
 
 def get_l2_data():
-    conn = pymysql.connect(host='119.91.135.214', port=3306, user='earthquake', password='123456',
+    conn = pymysql.connect(host='你的服务器IP地址', port=3306, user='earthquake', password='123456',
                            database='earthquake', charset='utf8')
     # 创建游标
     cursor = conn.cursor()
@@ -142,7 +142,7 @@ def get_l2_data():
     return result
 
 def get_r1_data():
-    engine = create_engine('mysql+pymysql://earthquake:123456@119.91.135.214/earthquake')
+    engine = create_engine('mysql+pymysql://earthquake:123456@你的服务器IP地址/earthquake')
     df_china = pd.read_sql(sql='select * from china_data', con=engine)  # 读取中国地震局数据
     level_count_list =df_china['level'].values.tolist()
     # 设置分段
@@ -156,7 +156,7 @@ def get_r1_data():
     return counts
 
 def search_earthquake(keyword):
-    conn = pymysql.connect(host='119.91.135.214', port=3306, user='earthquake', password='123456',
+    conn = pymysql.connect(host='你的服务器IP地址', port=3306, user='earthquake', password='123456',
                            database='earthquake', charset='utf8')
     # 创建游标
     cursor = conn.cursor()
