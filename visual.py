@@ -8,13 +8,12 @@ import folium.plugins as plugins
 import folium
 import requests
 
-conn = pymysql.connect(host='119.91.135.214', port=3306, user='earthquake', password='123456',
+conn = pymysql.connect(host='你的服务器IP地址', port=3306, user='earthquake', password='123456',
                            database='earthquake', charset='utf8')
 sql = "select * from usa_data where time>=2010"
 
 # 读取mysql数据库的数据为dataframe
 data = pd.read_sql_query(sql, conn)
-# data = pd.read_csv(r'C:\Users\tqdtiny\Desktop\毕业设计\数据集\jupyter/clean_usa.csv')
 
 # 无效的日期替换成一个合法的日期,日没有0日
 data['time'] = data['time'].str.replace('-00', '-01')
