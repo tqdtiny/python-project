@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <meta charset="utf-8">
+	  <title>模型预测</title>
+	  <link href="../static/css/index.css"/ rel="stylesheet">
+  </head>
+  <body>
+	  <h1>神经网络震级预测</h1>
+	  <h3>请输入要预测地点的经纬度，神经网络模型根据经纬度来预测该地点可能会发生的地震震级及其深度!</h3>
+	  <form id="prediction-form">
+	  	<label for="longitude">经度:</label>
+	  	<input type="text" id="longitude" name="longitude" required>
+	  	<br>
+	  	<label for="latitude">维度:</label>
+	  	<input type="text" id="latitude" name="latitude" required>
+	  	<br>
+	  	<button type="submit" id="submit-btn">预测震级和深度</button>
+	  </form>
+	  
+	  <div id="loader" style="display: none;">正在进行模型预测，请稍等!</div>
+	  <div id="result"></div>
+	  <script src="../static/js/index.js"></script>
+  </body>
+</html>

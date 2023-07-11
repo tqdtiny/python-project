@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地震数据分析预测</title>
+	<link href="../static/css/home.css"/ rel="stylesheet">
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/echarts.min.js"></script>
+	<script src="../static/js/china.js"></script>
+	<script src="../static/js/echarts-wordcloud.min.js"></script>
+	<link href="../static/css/index.css"/ rel="stylesheet">
+</head>
+<body>
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li class="current">可视化大屏</li>
+                <li>地震频发地带</li>
+                <li>各年份发生地震分布</li>
+				<li>地震热力图</li>
+                <li>神经网络预测</li>
+				<li>地震历史搜索</li>
+            </ul>
+        </div>
+        <div class="tab_con">
+			<!-- 可视化大屏页面设置 -->
+            <div class="item" style="display:block;">
+				<div id="title">地震可视化大屏</div>
+				<div id="tim">我是时间</div>
+				<div id="l1">我是左1</div>
+				<div id="l2">我是左2</div>
+				<div id="c">
+					<div class="num"><h1 class="txt">最近发生地震的地方</h1></div>
+				</div>
+				<div id="c1">
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+					<div class="line"><h1>text</h1></div>
+				</div>
+				<div id="c2">我是中2</div>
+				<div id="r1">我是右1</div>
+				<div id="r2">我是右2</div>
+            </div>
+			<!-- 地震频发地带内容 -->
+            <div class="item">
+				<iframe src="{{ url_for('embed_html') }}" frameborder="0" style="width: 100%; height: 95%; position: absolute; top: 10; left: 0;"></iframe>
+
+            </div>
+			<!-- 各年份发生地震分布内容 -->
+            <div class="item">
+				<iframe src="{{ url_for('embed1_html') }}" frameborder="0" style="width: 100%; height: 95%; position: absolute; top: 10; left: 0;"></iframe>
+             
+            </div>
+			<!-- 地震热力图 -->
+			<div class="item">
+				<iframe src="{{ url_for('embed2_html') }}" frameborder="0" style="width: 100%; height: 95%; position: absolute; top: 10; left: 0;"></iframe>
+			 
+			</div>
+			<!-- 神经网络预测页面设置 -->
+            <div class="item">
+				<div id="titlepre">神经网络预测</div>
+				<form id="prediction-form">
+					<h3>请输入要预测地点的时间、经度和维度，神经网络模型根据经纬度来预测该地点可能会发生的地震震级及其深度!</h3>
+					<label for="time">时间:</label>
+					<input type="text" id="time" name="time" required>
+					
+					<label for="longitude">经度:</label>
+					<input type="text" id="longitude" name="longitude" required>
+
+					<label for="latitude">维度:</label>
+					<input type="text" id="latitude" name="latitude" required>
+	
+					<button type="submit" id="submit-btn">预测震级和深度</button>
+				</form>
+				
+				<div id="loader" style="display: none;">正在进行模型预测，请稍等!</div>
+				<div id="result"></div>
+            </div>
+			<!-- 地区搜索 -->
+			<div class="item">
+				<script type="text/javascript">
+				    function search() {
+				        var place = $('#place').val();
+						// 添加loading提示
+						$('#result1').html('<tr><td colspan="4">正在搜索...</td></tr>');
+				        $.ajax({
+				            url: "/search",
+				            data: {"place": place},
+				            type: "POST",
+				            dataType: "json",
+				            success: function (data) {
+				                console.log(data)
+				                var html = '';
+				                for (var i = 0; i < data.length; i++) {
+				                    html += '<tr><td>' + data[i].description + '</td></tr>';
+				                }
+				                $('#result1').html(html);
+				            },
+							// 隐藏loading提示
+							complete: function () {
+								$('#result1').find('tr:first td').html('');
+							}
+				        });
+				    }
+				    function prevPage() {
+				        var page = parseInt($('#page').val()) - 1;
+				        if (page >= 1) {
+				            $('#page').val(page);
+				            search();
+				        }
+				    }
+				    function nextPage() {
+				        var page = parseInt($('#page').val()) + 1;
+				        $('#page').val(page);
+				        search();
+				    }
+				</script>
+				<body>
+				    <input type="text" id="place" placeholder="请输入地区名称">
+				    <input type="button" value="搜索" onclick="search()">
+				    <table>
+				        <thead>
+				            <tr id="search">
+								<th>发震时刻</th>
+								<th>+</th>
+								<th>地震参考位置</th>
+								<th>+</th>
+								<th>震级(M)</th>
+								<th>+</th>
+								<th>深度(千米)</th>
+				            </tr>
+				        </thead>
+				        <tbody id="result1">
+				            <!-- 在此处动态生成表格行 -->
+				        </tbody>
+				    </table>
+				</body>
+			</div>
+        </div>
+    </div>
+	<script src="../static/js/home.js"></script>
+	<script src="../static/js/ec_center.js"></script>
+	<script src="../static/js/controller.js"></script>
+	<script src="../static/js/ec_left1.js"></script>
+	<script src="../static/js/ec_left2.js"></script>
+	<script src="../static/js/ec_right1.js"></script>
+	<script src="../static/js/ec_right2.js"></script>
+	<script src="../static/js/index.js"></script>
+</body>
+<script>
+	gettime()
+	get_all()
+	get_c2_data()
+	get_l1_data()
+	get_l2_data()
+	get_r1_data()
+	get_r2_data()
+	setInterval(gettime,1000)
+	// 一个小时刷新一次(1000*3600)
+	setInterval(get_all,1000*300)
+	setInterval(get_c2_data,1000*3600)
+	setInterval(get_l1_data,1000*3600)
+	setInterval(get_l2_data,1000*3600)
+	setInterval(get_r1_data,1000*3600)
+	setInterval(get_r2_data,1000*3600)
+</script>
+</html>

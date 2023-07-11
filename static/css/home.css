@@ -1,0 +1,246 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+li{
+	list-style: none;
+}
+.tab{
+	top: 0%;
+	width: 100%;
+	height: 400px;
+}
+.tab_list{
+	width: 100%;
+	height: 36px;
+	background-color: #f7f7f7;
+	border: 1px solid #eee;
+	border-bottom: 1px solid #e4393c;
+}
+.current {
+	background-color: #e4393c;
+	color: #fff;
+}
+.tab_list li{
+	font: 14px Microsoft YaHei;
+	display: inline-block;
+	padding:9px 25px;
+}
+.tab_list li:hover{
+	cursor: pointer;
+}
+.tab_con{
+	width: 100%;
+	height: 100%;
+	border: 1px solid #eee;
+	border-top: none;
+
+}
+.tab_con .item{
+	height: 100%;
+	display: none;
+	font-size: 13px;
+	text-indent: 13px;
+}
+
+
+/* 可视化大屏 */
+#title{
+	position: absolute; /* 相对于整个页面body绝对定位*/
+	width: 100%;
+	height: 6%;
+	top: 4%;
+	left: 0%;
+	background: #100c2a;
+	color: white;
+	font-size: 30px;
+	/* 居中分布 */
+	display: flex; /* 启动弹性布局*/
+	align-items: center; /* 水平方向居中*/
+	justify-content: center; /* 竖直方向居中 */
+}
+#tim{
+	position: absolute;
+/* 	width: 30%; */
+	height: 10%;
+	right: 2%;
+	top: 5%;
+	color: white;
+	font-size: 20px;
+}
+#miantim{
+	position: absolute;
+/* 	width: 30%; */
+	height: 5%;
+	left: 2%;
+	top: 0%;
+	color: #FFFFFF;
+	font-size: 20px;
+}
+#c{
+	position: absolute;
+	width: 40%;
+	height: 5%;
+	top: 10%;
+	left: 30%;
+	background: #100c2a;
+	display: flex; /* 启动弹性布局*/
+	align-items: center; /* 水平方向居中*/
+	justify-content: center; /* 竖直方向居中 */
+
+}
+
+/* 中间c1动态播报最近数据 */
+#c1{
+	position: absolute;
+	width: 40%;
+	height: 25%;
+	top: 15%;
+	left: 30%;
+	color: white;
+	background: #100c2a;
+	overflow: hidden;
+}
+
+.line{
+	font-size: 8px;
+	line-height: 30px;
+	text-align: center;
+	
+}
+.line:first-child{
+	animation: anim 12s infinite;
+}
+@keyframes anim {
+	0%{
+		margin-top: 0;
+	}
+	16%{
+		margin-top: -60px;
+	}
+	33%{
+		margin-top: -120px;
+	}
+	50%{
+		margin-top: -180px;
+	}
+	66%{
+		margin-top: -120px;
+	}
+	82%{
+		margin-top: -60px;
+	}
+	100%{
+		margin-top: -0;
+	}
+}
+
+.num{
+	/* position: absolute; */
+	float: left;
+	color: gold;
+	font-size: 10px;
+	/* 居中分布 */
+	display: flex; /* 启动弹性布局*/
+	align-items: center; /* 水平方向居中*/
+	justify-content: center; /* 竖直方向居中 */
+}
+.txt{
+	/* position: absolute; */
+	float: left;
+	font-family: "幼圆"; /* 设置字体*/
+	/* 居中分布 */
+	display: flex; /* 启动弹性布局*/
+	align-items: center; /* 水平方向居中*/
+	justify-content: center; /* 竖直方向居中 */
+}
+#c2{
+	position: absolute;
+	width: 40%;
+	height: 60%;
+	top: 40%;
+	left: 30%;
+	background: #8888;
+	overflow: hidden;
+}
+#l1{
+	position: absolute;
+	width: 30%;
+	height: 45%;
+	top: 10%;
+	left: 0%;
+	background: #666666;
+}
+#l2{
+	position: absolute;
+	width: 30%;
+	height: 45%;
+	top: 55%;
+	left: 0%;
+	background: #777777;
+}
+#r1{
+	position: absolute;
+	width: 30%;
+	height: 45%;
+	top: 10%;
+	right: 0%;
+	background: #666666;
+}
+#r2{
+	position: absolute;
+	width: 30%;
+	height: 45%;
+	top: 55%;
+	right: 0%;
+	background: #777777;
+}
+
+/* 神经网络预测页面布局设置 */
+#titlepre{
+	position: absolute; /* 相对于整个页面body绝对定位*/
+	width: 100%;
+	height: 6%;
+	top: 4%;
+	left: 0%;
+	color: black;
+	font-size: 30px;
+	/* 居中分布 */
+	display: flex; /* 启动弹性布局*/
+	align-items: center; /* 水平方向居中*/
+	justify-content: center; /* 竖直方向居中 */
+}
+#prediction-form{
+	position: absolute;
+	width: 40%;
+	height: 60%;
+	top: 15%;
+	left: 30%;
+	font-size: 14px;
+}
+#result{
+	position: absolute;
+	width: 40%;
+	height: 60%;
+	top: 24%;
+	left: 30%;
+	font-size: 15px;
+}
+#loader{
+	position: absolute;
+	width: 40%;
+	height: 60%;
+	top: 24%;
+	left: 30%;
+	font-size: 15px;
+}
+#search{
+	position: absolute;
+	top: 6%;
+	left: 1%;
+}
+#result1{
+	position: absolute;
+	top: 8%;
+	left: 1%;
+}
