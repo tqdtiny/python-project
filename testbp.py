@@ -9,7 +9,7 @@ from sklearn import preprocessing
 import keras
 
 def deep_model(times,longitude,latitude):
-    conn = pymysql.connect(host='119.91.135.214', port=3306, user='earthquake', password='123456',
+    conn = pymysql.connect(host='你的服务器IP', port=3306, user='earthquake', password='123456',
                            database='earthquake', charset='utf8')
     sql = "select time,level,lot,lat,deep from china_data where time>=2020"
     # 读取mysql数据库的数据为dataframe
